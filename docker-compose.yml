@@ -1,0 +1,32 @@
+#mariadb & adminer
+
+version: '3.1'
+
+services:
+
+  db:
+    image: mariadb (образ)
+
+или
+ 
+ build: ./db (тогда образ собирается с dockerfile который находиться в папке db)
+  
+  restart: always (перезапуск при сбое)
+    
+    environment:
+    
+    MYSQL_ROOT_PASSWORD: 12345677 (пароль root )
+
+  adminer:
+ 
+ build: ./adminer
+
+restart: always
+ 
+ ports:
+      - 6080:8080
+
+Если build: тогда в  пишем FROM mariadb (образ)
+
+docker-compose up --build Собираем стек
+
