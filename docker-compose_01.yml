@@ -1,0 +1,45 @@
+#nginx & php & phpmyadmin
+version: '3'
+services:
+ nginx:
+  image: nginx:latest
+  container_name: nginx
+  ports:
+    - '80:80'
+    - '443:443'
+  volumes:
+    - ./nginx/core:/etc/nginx/conf.d
+    - ./nginx/www:/var/www/
+    - ./nginx/logs:/var/log/nginx/
+    - ./nginx/html:/usr/share/nginx/html/
+  links:
+    - php
+
+ mysql:
+  image: mysql:latest
+  ports:
+    - '3306:3306'
+  container_name: mysql
+  environment:
+   - MYSQL_ROOT_PASSWORD=DbrnjhbZ88
+   - MYSQL_DATABASE=stolovka
+   - MYSQL_USER=stolovka
+   - MYSQL_PASSWORD=stolovka
+  volumes:
+   - ./mysql:/var/lib/mysql
+
+ php:
+  build: ./php
+  container_name: php-fpm
+  volumes:
+   - ./nginx/www:/var/www
+  links:
+   - mysql
+
+ phpmyadmin:
+  image: phpmyadmin
+  container_name: phpmyadmin/phpmyadmin
+  ports:
+   - '8090:80'
+  links:
+   - mysql:db
