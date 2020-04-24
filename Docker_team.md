@@ -18,7 +18,7 @@ docker ps -a список всех контейнеров
 
 docker ps - список только запущенных контейнеров
 
-docker exec -it IDconteyner bash, выход Ctrl+D
+docker exec -it 6a284d95dda7 bash, выход Ctrl+D # зайтив в контейнер 6a284d95dda7 и выполнить команду bash
 
 docker start имя контейнера - запускает остановленный контейнер
 
